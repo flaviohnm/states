@@ -1,0 +1,62 @@
+<!DOCTYPE html> 
+<html> 
+  
+<head> 
+  <meta name="viewport" content='width=device-width,initial-scale=1.0'> 
+  <title>DEVIII - Estados</title>
+</head> 
+  
+<body> 
+  <h1 style="color:green">Estados</h1>
+
+  <hr/>
+  <button id="btn-list">Listar</button>
+  <button id="btn-update">Atualizar</button>
+     
+  <hr/> 
+  <h3>Lista</h3>
+   
+  <ul id="list">
+  </ul>
+
+  <script>
+
+	document.querySelector('#btn-list').addEventListener('click', e => {
+
+		const ul = document.getElementById('list');
+	
+		ul.innerHTML = ''
+   
+	    fetch('api/v1/states/list').then((res) => {
+	        return res.json() 
+	      }).then((list) => {
+	      
+	      	 for (const state of list) {
+	           ul.innerHTML += ('<li>' + state.id + ' - ' + state.title + ' - ' + state.url + '</li>')
+	      	 }
+	      	 
+	      }) 
+	      .catch((err) => console.debug(err));
+	});
+	
+  </script>
+
+  <script>
+
+    document.querySelector('#btn-update').addEventListener('click', e => {
+
+        const ul = document.getElementById('list');
+
+        ul.innerHTML = ''
+
+        fetch('api/v1/states/data').then((res) => {
+            return res.json()
+          })
+          .catch((err) => console.debug(err));
+    });
+
+  </script>
+
+</body> 
+  
+</html>
